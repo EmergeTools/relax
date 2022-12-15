@@ -15,7 +15,7 @@ class InputTextTest {
 
     @Test
     fun inputText() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
             click("NEXT")
@@ -27,7 +27,7 @@ class InputTextTest {
 
     @Test
     fun inputTextObjectDoesntExist() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
             click("NEXT")
@@ -40,7 +40,7 @@ class InputTextTest {
 
     @Test
     fun optionalInputText() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
             click("NEXT")

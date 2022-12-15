@@ -13,7 +13,7 @@ class FindObjectTest {
 
     @Test
     fun findObject() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
             val obj = findObject("NEXT")
@@ -24,7 +24,7 @@ class FindObjectTest {
 
     @Test
     fun findObjectDoesntExist() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
 
@@ -36,7 +36,7 @@ class FindObjectTest {
 
     @Test
     fun optionalFindObject() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
 

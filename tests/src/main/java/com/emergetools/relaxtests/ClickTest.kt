@@ -13,7 +13,7 @@ class ClickTest {
 
     @Test
     fun click() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
 
@@ -28,7 +28,7 @@ class ClickTest {
 
     @Test
     fun clickObjectDoesntExist() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
 
@@ -40,7 +40,7 @@ class ClickTest {
 
     @Test
     fun optionalClick() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
 

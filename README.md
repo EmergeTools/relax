@@ -3,7 +3,7 @@
 Relax is a lightweight wrapper around Android's UI Automator library. It helps write clear and concise UI tests:
 
 ```kotlin
-Relax.flow("com.example.myapp") {
+Relax("com.example.myapp") {
     pressHome()
     launch()
     inputText("me@example.com", "id/email")
@@ -56,7 +56,7 @@ dependencies {
 Relax allows you to build UI test flows as a sequence of actions:
 
 ```kotlin
-Relax.flow("<your app's package name>") {
+Relax("<your app's package name>") {
     // Arbitrary actions
 }
 ```
@@ -222,7 +222,7 @@ click("Purchase")
 Ignoring all failures by default:
 ```kotlin
 val config = FlowConfig(errorHandler = NoOpFlowErrorHandler)
-Relax.flow("id", config) {
+Relax("id", config) {
     // …
 }
 ```
@@ -235,7 +235,7 @@ val errorHandler = object : FlowErrorHandler {
     }
 }
 val config = FlowConfig(errorHandler = errorHandler)
-Relax.flow("id", config) {
+Relax("id", config) {
     // …
 }
 ```
@@ -245,7 +245,7 @@ Relax.flow("id", config) {
 Relax is a lightweight wrapper around UI Automator, therefore it's easy to leverage the full feature set of UI Automator. For example:
 
 ```kotlin
-Relax.flow(/* … */) {
+Relax(/* … */) {
     if (!device.isScreenOn) device.wakeUp()
     launch()
     click("Next")

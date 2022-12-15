@@ -13,7 +13,7 @@ class ExampleInstrumentedTest {
     @Test
     fun test() {
         val config = FlowConfig(debug = true)
-        Relax.flow("com.emergetools.relaxexamples", config) {
+        Relax("com.emergetools.relaxexamples", config) {
             pressHome()
             launch()
             click("id/fab")

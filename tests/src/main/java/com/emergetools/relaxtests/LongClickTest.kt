@@ -13,7 +13,7 @@ class LongClickTest {
 
     @Test
     fun longClick() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
 
@@ -28,7 +28,7 @@ class LongClickTest {
 
     @Test
     fun longClickObjectDoesntExist() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
 
@@ -40,7 +40,7 @@ class LongClickTest {
 
     @Test
     fun optionalLongClick() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launch()
 

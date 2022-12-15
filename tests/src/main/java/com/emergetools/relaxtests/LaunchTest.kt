@@ -15,7 +15,7 @@ class LaunchTest {
 
     @Test
     fun launch() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             waitForReportFullyDrawn {
                 launch()
@@ -28,7 +28,7 @@ class LaunchTest {
 
     @Test
     fun launchArbitraryPackage() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             val intent = Intent(Settings.ACTION_SETTINGS)
 
@@ -43,7 +43,7 @@ class LaunchTest {
 
     @Test
     fun launchWithLink() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             launchWithLink("emerge://deep")
 
@@ -53,7 +53,7 @@ class LaunchTest {
 
     @Test
     fun coldLaunch() {
-        Relax.flow("com.emergetools.relaxexamples") {
+        Relax("com.emergetools.relaxexamples") {
             pressHome()
             coldLaunch()
 
