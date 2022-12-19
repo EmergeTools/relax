@@ -39,6 +39,12 @@ class Flow(val packageName: String, val config: FlowConfig) {
         if (config.trace) TracingInterceptor else null
     )
 
+    init {
+        // Ensures UiDevice is properly initialized. UiObject has a deprecated constructor which is still used internally by UI Automator but fails if
+        // UiDevice was not first initialized with an Instrumentation instance.
+        device
+    }
+
     fun optional(flow: Flow.() -> Unit) = intercept {
         Flow(packageName, config.copy(errorHandler = NoOpFlowErrorHandler)).flow()
     }
