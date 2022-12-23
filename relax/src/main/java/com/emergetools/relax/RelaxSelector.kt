@@ -32,6 +32,10 @@ class RelaxSelector(
         uiSelector = uiSelector.classNameMatches(regex)
     }
 
+    fun clickable(clickable: Boolean) = apply {
+        uiSelector = uiSelector.clickable(clickable)
+    }
+
     fun description(description: String) = apply {
         uiSelector = uiSelector.description(description)
     }
