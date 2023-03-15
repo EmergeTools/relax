@@ -3,5 +3,8 @@
 
     <queries>
         <package android:name="com.emergetools.relaxexamples" />
+        <package android:name="org.joinmastodon.android" />
+        <package android:name="org.wikipedia" />
+        <package android:name="com.android.vending" />
     </queries>
 </manifest>

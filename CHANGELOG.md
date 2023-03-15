@@ -10,3 +10,5 @@ and this project adheres to [Semantic Versioning](https://semver.org/spec/v2.0.0
 ### Added
 
 - `clickable` selector.
+- `getObject` function works like `findObject` used to work (throws if the view represented by the UiObject doesn't exist).
+- `findObject` now returns a `UiObject` even if the view represented by the UiObject doesn't exist.

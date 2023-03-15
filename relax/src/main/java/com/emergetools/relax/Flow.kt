@@ -185,10 +185,18 @@ class Flow(val packageName: String, val config: FlowConfig) {
     }
 
     /**
+     * @return A UiObject which represents a view that matches the criteria.
+     */
+    fun findObject(select: RelaxSelector.() -> Unit): UiObject = intercept {
+        val selector = RelaxSelector(packageName).apply(select).toUiSelector()
+        device.findObject(selector)
+    }
+
+    /**
      * If the object exists, calls [block] on it and returns its return value, otherwise returns
      * [default].
      */
-    private fun <T> findObject(
+    private fun <T> getObject(
         select: RelaxSelector.() -> Unit,
         default: T,
         block: (UiObject) -> T
@@ -198,11 +206,22 @@ class Flow(val packageName: String, val config: FlowConfig) {
     }
 
     /**
+     * @param textOrResId If the string contains ":id/" it will be treated as a resource ID,
+     *   otherwise searches for the element whose visible text matches exactly. Matching is
+     *   case-sensitive.
      * @return A UiObject which represents a view that matches the criteria.
+     * @throws UiObjectNotFoundException if the view represented by this UiObject does not exist
      */
-    fun findObject(select: RelaxSelector.() -> Unit): UiObject = intercept {
-        val selector = RelaxSelector(packageName).apply(select).toUiSelector()
-        device.findObject(selector).also {
+    fun getObject(textOrResId: String) = getObject {
+        textOrResId(textOrResId)
+    }
+
+    /**
+     * @return A UiObject which represents a view that matches the criteria.
+     * @throws UiObjectNotFoundException if the view represented by this UiObject does not exist
+     */
+    fun getObject(select: RelaxSelector.() -> Unit): UiObject = intercept {
+        findObject(select).also {
             if (!it.exists()) error(UiObjectNotFoundException(it.selector.toString()))
         }
     }
@@ -233,7 +252,7 @@ class Flow(val packageName: String, val config: FlowConfig) {
      * @return true if successful, false otherwise
      */
     fun click(select: RelaxSelector.() -> Unit): Boolean = intercept {
-        findObject(select, false) {
+        getObject(select, false) {
             it.click().also { result ->
                 if (!result) error(UnsupportedOperationException("click ${it.selector}"))
                 waitForIdle()
@@ -281,7 +300,7 @@ class Flow(val packageName: String, val config: FlowConfig) {
      * @return true if successful, false otherwise
      */
     fun longClick(select: RelaxSelector.() -> Unit): Boolean = intercept {
-        findObject(select, false) {
+        getObject(select, false) {
             it.longClick().also { result ->
                 if (!result) error(UnsupportedOperationException("longClick ${it.selector}"))
                 waitForIdle()
@@ -322,7 +341,7 @@ class Flow(val packageName: String, val config: FlowConfig) {
      * @return true if successful, false otherwise
      */
     fun inputText(inputText: String, select: RelaxSelector.() -> Unit): Boolean = intercept {
-        findObject(select, false) {
+        getObject(select, false) {
             it.setText(inputText).also { result ->
                 if (!result) error(UnsupportedOperationException("inputText $inputText ${it.selector}"))
                 waitForIdle()
@@ -575,7 +594,7 @@ class Flow(val packageName: String, val config: FlowConfig) {
      * @return true if successful, false otherwise
      */
     fun swipeDown(select: RelaxSelector.() -> Unit): Boolean = intercept {
-        findObject(select, false) {
+        getObject(select, false) {
             it.swipeDown(config.swipeSteps).also { result ->
                 if (!result) error(UnsupportedOperationException("swipeDown ${it.selector}"))
             }
@@ -608,7 +627,7 @@ class Flow(val packageName: String, val config: FlowConfig) {
      * @return true if successful, false otherwise
      */
     fun swipeLeft(select: RelaxSelector.() -> Unit): Boolean = intercept {
-        findObject(select, false) {
+        getObject(select, false) {
             it.swipeLeft(config.swipeSteps).also { result ->
                 if (!result) error(UnsupportedOperationException("swipeLeft ${it.selector}"))
             }
@@ -641,7 +660,7 @@ class Flow(val packageName: String, val config: FlowConfig) {
      * @return true if successful, false otherwise
      */
     fun swipeRight(select: RelaxSelector.() -> Unit): Boolean = intercept {
-        findObject(select, false) {
+        getObject(select, false) {
             it.swipeRight(config.swipeSteps).also { result ->
                 if (!result) error(UnsupportedOperationException("swipeRight ${it.selector}"))
             }
@@ -674,7 +693,7 @@ class Flow(val packageName: String, val config: FlowConfig) {
      * @return true if successful, false otherwise
      */
     fun swipeUp(select: RelaxSelector.() -> Unit): Boolean = intercept {
-        findObject(select, false) {
+        getObject(select, false) {
             it.swipeUp(config.swipeSteps).also { result ->
                 if (!result) error(UnsupportedOperationException("swipeUp ${it.selector}"))
             }
